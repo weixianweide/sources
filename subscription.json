@@ -1,3 +1,453 @@
 {
-  "mediaSources": []
+  "mediaSources": [
+    {
+      "factoryId": "cloud-drive",
+      "version": 1,
+      "arguments": {
+        "name": "夸克网盘",
+        "description": "在你的夸克网盘里找视频, 先在设置 - 数据源里登录夸克",
+        "protocol": {
+          "id": "quark",
+          "name": "夸克网盘",
+          "names": {
+            "en": "Quark Drive",
+            "zh-TW": "夸克網盤",
+            "zh-HK": "夸克網盤"
+          },
+          "iconUrl": "https://pan.quark.cn/favicon.ico",
+          "websiteUrl": "https://pan.quark.cn",
+          "http": {
+            "hosts": [
+              "drive-pc.quark.cn",
+              "drive-m.quark.cn",
+              "drive.quark.cn"
+            ],
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 QuarkPC/7.0.0 QuarkCloudDrivePC/7.0.0 quark-cloud-drive/5.0.0 Channel/pckk_other_ch",
+            "headers": {
+              "Referer": "https://pan.quark.cn/",
+              "Origin": "https://pan.quark.cn",
+              "Accept": "application/json, text/plain, */*"
+            },
+            "query": {
+              "pr": "ucpro",
+              "fr": "pc",
+              "uc_param_str": ""
+            },
+            "rotatingCookies": [
+              "__puus",
+              "__pus"
+            ],
+            "connectTimeoutMillis": 5000,
+            "socketTimeoutMillis": 8000,
+            "requestTimeoutMillis": 20000
+          },
+          "envelope": {
+            "code": "code",
+            "okCodes": [
+              "0"
+            ],
+            "status": "status",
+            "authStatuses": [
+              "401",
+              "403"
+            ],
+            "message": "message",
+            "capacityLimitCodes": [
+              "32003"
+            ]
+          },
+          "file": {
+            "id": "fid",
+            "name": "file_name",
+            "parentId": "pdir_fid",
+            "isDir": "dir",
+            "dirValues": [
+              "true"
+            ],
+            "size": "size",
+            "updatedAt": "updated_at",
+            "videoHeight": "video_height",
+            "category": "obj_category",
+            "videoCategories": [
+              "video"
+            ],
+            "shareToken": "share_fid_token"
+          },
+          "rootFolderId": "0",
+          "api": {
+            "tier": {
+              "request": {
+                "url": "https://{host}/1/clouddrive/member",
+                "query": {
+                  "fetch_subscribe": "true",
+                  "_ch": "home",
+                  "fetch_identity": "true"
+                }
+              },
+              "value": "data.member_type"
+            },
+            "nickname": {
+              "request": {
+                "url": "https://pan.quark.cn/account/info",
+                "query": {
+                  "fr": "pc",
+                  "platform": "pc"
+                },
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+                "headers": {
+                  "Referer": "https://pan.quark.cn/",
+                  "Origin": "https://pan.quark.cn",
+                  "Accept": "application/json, text/plain, */*"
+                },
+                "common": false,
+                "envelope": false
+              },
+              "value": "data.nickname"
+            },
+            "search": {
+              "request": {
+                "url": "https://{host}/1/clouddrive/file/search",
+                "query": {
+                  "q": "{keyword}",
+                  "_page": "{page}",
+                  "_size": "{pageSize}",
+                  "_fetch_total": "1",
+                  "_sort": "file_type:asc,updated_at:desc"
+                }
+              },
+              "items": "data.list",
+              "total": "metadata._total",
+              "pageSize": 50
+            },
+            "listFolder": {
+              "request": {
+                "url": "https://{host}/1/clouddrive/file/sort",
+                "query": {
+                  "pdir_fid": "{folderId}",
+                  "_page": "{page}",
+                  "_size": "{pageSize}",
+                  "_fetch_total": "1",
+                  "_sort": "file_type:asc,file_name:asc"
+                }
+              },
+              "items": "data.list",
+              "total": "metadata._total",
+              "pageSize": 100
+            },
+            "download": {
+              "request": {
+                "method": "POST",
+                "url": "https://{host}/1/clouddrive/file/download",
+                "body": {
+                  "fids": "{fileIds}"
+                }
+              },
+              "items": "data",
+              "url": "download_url"
+            },
+            "transcoded": {
+              "request": {
+                "method": "POST",
+                "url": "https://{host}/1/clouddrive/file/v2/play",
+                "body": {
+                  "fid": "{fileId}",
+                  "resolutions": "normal,low,high,super,2k,4k",
+                  "supports": "fmp4,m3u8"
+                }
+              },
+              "items": "data.video_list",
+              "url": "video_info.url",
+              "height": "video_info.height",
+              "accessible": "accessable",
+              "accessibleValues": [
+                "true"
+              ]
+            },
+            "createFolder": {
+              "request": {
+                "method": "POST",
+                "url": "https://{host}/1/clouddrive/file",
+                "body": {
+                  "pdir_fid": "{parentId}",
+                  "file_name": "{name}",
+                  "dir_path": "",
+                  "dir_init_lock": false
+                }
+              },
+              "value": "data.fid"
+            },
+            "deleteFiles": {
+              "request": {
+                "method": "POST",
+                "url": "https://{host}/1/clouddrive/file/delete",
+                "body": {
+                  "action_type": 2,
+                  "filelist": "{fileIds}",
+                  "exclude_fids": []
+                }
+              },
+              "value": "data.task_id"
+            },
+            "task": {
+              "request": {
+                "url": "https://{host}/1/clouddrive/task",
+                "query": {
+                  "task_id": "{taskId}",
+                  "retry_index": "{retry}"
+                }
+              },
+              "status": "data.status",
+              "done": [
+                "2"
+              ],
+              "failed": [
+                "3"
+              ],
+              "message": "data.message",
+              "resultIds": "data.save_as.save_as_top_fids",
+              "maxPolls": 10,
+              "intervalMillis": 1000
+            },
+            "shareToken": {
+              "request": {
+                "method": "POST",
+                "url": "https://{host}/1/clouddrive/share/sharepage/token",
+                "body": {
+                  "pwd_id": "{shareId}",
+                  "passcode": "{passcode}"
+                },
+                "cookie": false
+              },
+              "token": "data.stoken",
+              "title": "data.title"
+            },
+            "listShare": {
+              "request": {
+                "url": "https://{host}/1/clouddrive/share/sharepage/detail",
+                "query": {
+                  "pwd_id": "{shareId}",
+                  "stoken": "{shareToken}",
+                  "pdir_fid": "{folderId}",
+                  "force": "0",
+                  "_page": "{page}",
+                  "_size": "{pageSize}",
+                  "_fetch_total": "1",
+                  "_sort": "file_type:asc,file_name:asc"
+                },
+                "cookie": false
+              },
+              "items": "data.list",
+              "total": "metadata._total",
+              "pageSize": 100
+            },
+            "saveFromShare": {
+              "request": {
+                "method": "POST",
+                "url": "https://{host}/1/clouddrive/share/sharepage/save",
+                "body": {
+                  "fid_list": "{fileIds}",
+                  "fid_token_list": "{fileTokens}",
+                  "to_pdir_fid": "{folderId}",
+                  "pwd_id": "{shareId}",
+                  "stoken": "{shareToken}",
+                  "pdir_fid": "{shareRootId}",
+                  "scene": "link"
+                }
+              },
+              "value": "data.task_id"
+            }
+          },
+          "login": {
+            "requiredCookies": [
+              "__pus"
+            ],
+            "cookieHint": "在电脑浏览器登录 pan.quark.cn，打开开发者工具，复制任意一个请求里的整段 Cookie",
+            "qr": {
+              "start": {
+                "url": "https://uop.quark.cn/cas/ajax/getTokenForQrcodeLogin",
+                "query": {
+                  "client_id": "532",
+                  "v": "1.2",
+                  "request_id": "{requestId}"
+                },
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+                "headers": {
+                  "Referer": "https://pan.quark.cn/",
+                  "Origin": "https://pan.quark.cn",
+                  "Accept": "application/json, text/plain, */*"
+                },
+                "cookie": false,
+                "common": false,
+                "envelope": false
+              },
+              "token": "data.members.token",
+              "status": "status",
+              "okStatuses": [
+                "2000000"
+              ],
+              "content": "https://su.quark.cn/4_eMHBJ?token={token}&client_id=532&ssb=weblogin&uc_param_str=&uc_biz_str=S%3Acustom%7COPT%3ASAREA%400%7COPT%3AIMMERSIVE%401%7COPT%3ABACK_BTN_STYLE%400",
+              "poll": {
+                "url": "https://uop.quark.cn/cas/ajax/getServiceTicketByQrcodeToken",
+                "query": {
+                  "client_id": "532",
+                  "v": "1.2",
+                  "token": "{token}",
+                  "request_id": "{requestId}"
+                },
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+                "headers": {
+                  "Referer": "https://pan.quark.cn/",
+                  "Origin": "https://pan.quark.cn",
+                  "Accept": "application/json, text/plain, */*"
+                },
+                "cookie": false,
+                "common": false,
+                "envelope": false
+              },
+              "confirmedStatuses": [
+                "2000000"
+              ],
+              "expiredStatuses": [
+                "50004002",
+                "50004003",
+                "50004004"
+              ],
+              "ticket": "data.members.service_ticket",
+              "exchange": {
+                "url": "https://pan.quark.cn/account/info",
+                "query": {
+                  "st": "{ticket}",
+                  "lw": "scan"
+                },
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+                "headers": {
+                  "Referer": "https://pan.quark.cn/",
+                  "Origin": "https://pan.quark.cn",
+                  "Accept": "application/json, text/plain, */*"
+                },
+                "cookie": false,
+                "common": false,
+                "envelope": false
+              },
+              "nickname": "data.nickname",
+              "appName": "夸克 App",
+              "mobileOpen": {
+                "android": "qklink://www.uc.cn/b20b84fd735a8dd3f7541129bacc4e9a?action=open_url&url={url}",
+                "ios": "qklink://www.uc.cn/656bdcddd4758b39206a8181c91a7d14?action=open_url&url={url}",
+                "inAppUserAgent": "quark/"
+              },
+              "timeoutSeconds": 300,
+              "pollIntervalSeconds": 2
+            }
+          },
+          "playback": {
+            "headers": {
+              "Cookie": "{cookie}",
+              "User-Agent": "{userAgent}",
+              "Referer": "https://pan.quark.cn/"
+            },
+            "parallelConnections": 16
+          },
+          "tiers": [
+            {
+              "match": "^EXP_.*SVIP",
+              "label": "体验会员",
+              "labels": {
+                "en": "Trial membership",
+                "zh-TW": "體驗會員",
+                "zh-HK": "體驗會員"
+              },
+              "parallelConnections": 4
+            },
+            {
+              "match": "^EXP_",
+              "label": "体验会员",
+              "labels": {
+                "en": "Trial membership",
+                "zh-TW": "體驗會員",
+                "zh-HK": "體驗會員"
+              }
+            },
+            {
+              "match": "SVIP|^SUPER_VIP$",
+              "label": "超级会员",
+              "labels": {
+                "en": "SVIP",
+                "zh-TW": "超級會員",
+                "zh-HK": "超級會員"
+              },
+              "parallelConnections": 4
+            },
+            {
+              "match": "VIP",
+              "label": "会员",
+              "labels": {
+                "en": "VIP",
+                "zh-TW": "會員",
+                "zh-HK": "會員"
+              }
+            },
+            {
+              "match": ".",
+              "label": "普通用户",
+              "labels": {
+                "en": "Free",
+                "zh-TW": "一般用戶",
+                "zh-HK": "普通用戶"
+              }
+            }
+          ],
+          "share": {
+            "linkPattern": "(?:https?://)?pan\\.quark\\.cn/s/([0-9A-Za-z]+)(?:\\?pwd=([0-9A-Za-z]+))?",
+            "url": "https://pan.quark.cn/s/{shareId}",
+            "rootFolderId": "0"
+          },
+          "links": {
+            "file": "https://pan.quark.cn/#/file/{fileId}",
+            "folder": "https://pan.quark.cn/list#/list/all/{folderId}"
+          },
+          "legacy": {
+            "accountKey": "quarkConfig",
+            "addedSharesKey": "quarkAddedShares",
+            "driveFactoryId": "quark-drive",
+            "addedSharesFactoryId": "quark-added-share",
+            "shareSearchFactoryId": "quark-share-search"
+          }
+        }
+      }
+    },
+    {
+      "factoryId": "cloud-drive-share-search",
+      "version": 1,
+      "arguments": {
+        "name": "夸克动画合集",
+        "drive": "quark",
+        "description": "整理好的夸克动画合集分享, 按番名找文件夹; 播放时转存到自己的夸克网盘",
+        "iconUrl": "https://pan.quark.cn/favicon.ico",
+        "config": {
+          "shares": [
+            "https://pan.quark.cn/s/68f098565da3",
+            "https://pan.quark.cn/s/6e7c653219fe",
+            "https://pan.quark.cn/s/e1bd0665b38f",
+            "https://pan.quark.cn/s/2d83252c207e",
+            "https://pan.quark.cn/s/aab10e922165",
+            "https://pan.quark.cn/s/bb8a1d6d18be",
+            "https://pan.quark.cn/s/15200d98f2d7",
+            "https://pan.quark.cn/s/aa10bff58886",
+            "https://pan.quark.cn/s/fc249fb537cf",
+            "https://pan.quark.cn/s/55c73ade5849",
+            "https://pan.quark.cn/s/e5767a59fe7c",
+            "https://pan.quark.cn/s/0dc1d6486f46",
+            "https://pan.quark.cn/s/efbd80b2fefc",
+            "https://pan.quark.cn/s/1271f8f2e113",
+            "https://pan.quark.cn/s/bd233d25e849",
+            "https://pan.quark.cn/s/51b5716438e3",
+            "https://pan.quark.cn/s/fa3ebb555792"
+          ],
+          "shareIndexDepth": 2
+        },
+        "tier": 0
+      }
+    }
+  ]
 }
