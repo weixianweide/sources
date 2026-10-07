@@ -489,6 +489,60 @@
             ]
           }
         }
+      },
+      {
+        "factoryId": "cloud-drive-share-search",
+        "version": 1,
+        "arguments": {
+          "name": "花卷",
+          "drive": "quark",
+          "description": "花卷 (网页) 详情页里的夸克分享链接, 播放时转存到自己的夸克网盘",
+          "iconUrl": "https://pan.quark.cn/favicon.ico",
+          "config": {
+            "searchUrl": "https://www.hjzhencai.top/index.php/vod/search/wd/{keyword}.html",
+            "detailLinkSelector": ".module-card-item-title a"
+          }
+        }
+      },
+      {
+        "factoryId": "cloud-drive-share-search",
+        "version": 1,
+        "arguments": {
+          "name": "PanSou",
+          "drive": "quark",
+          "description": "PanSou 盘搜里的夸克分享链接, 播放时转存到自己的夸克网盘",
+          "iconUrl": "https://pan.quark.cn/favicon.ico",
+          "config": {
+            "searchUrl": "https://pansou-latest-hv4k.onrender.com/api/search?kw={keyword}&res=merge&cloud_types=quark",
+            "itemsPath": "data.merged_by_type.quark",
+            "titlePath": "note",
+            "linkPaths": [
+              "url"
+            ],
+            "maxKeywords": 2,
+            "maxShares": 8
+          }
+        }
+      },
+      {
+        "factoryId": "cloud-drive-share-search",
+        "version": 1,
+        "arguments": {
+          "name": "PanHunt",
+          "drive": "quark",
+          "description": "PanHunt 盘搜里的夸克分享链接, 播放时转存到自己的夸克网盘",
+          "iconUrl": "https://pan.quark.cn/favicon.ico",
+          "config": {
+            "searchUrl": "https://s.panhunt.com/api/search?kw={keyword}&res=merge&cloud_types=quark",
+            "itemsPath": "data.merged_by_type.quark",
+            "titlePath": "note",
+            "linkPaths": [
+              "url"
+            ],
+            "maxKeywords": 2,
+            "maxShares": 8
+          }
+        }
       }
     ]
   }
