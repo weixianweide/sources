@@ -1,0 +1,64 @@
+name: 采纳数据源 issue
+
+# 维护者给「提交或更新数据源」的 issue 加上「采纳」标签: 把 issue 里的 JSON 写进 sources/, 重新生成 subscription.json,
+# 提交到 main 并关闭 issue; 出错时在 issue 里说明原因并摘掉标签
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: build-subscription
+  cancel-in-progress: false
+
+jobs:
+  accept:
+    if: github.event.label.name == '采纳'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      ISSUE_BODY: ${{ github.event.issue.body }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - id: write
+        run: python3 scripts/accept_issue.py 2> error.txt
+      - id: check
+        run: python3 scripts/build.py > build.txt 2>&1 || { cat build.txt; exit 1; }
+      - name: 提交并关闭 issue
+        env:
+          FILE: ${{ steps.write.outputs.file }}
+          NAME: ${{ steps.write.outputs.name }}
+          ACTION: ${{ steps.write.outputs.action }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$ACTION" = update ]; then verb=更新; else verb=新增; fi
+          git add "sources/$FILE" subscription.json
+          if git diff --cached --quiet; then
+            gh issue comment "$ISSUE_NUMBER" --body "内容和订阅里现有的一样，没有改动。"
+          else
+            git commit -m "$verb $NAME (#$ISSUE_NUMBER)"
+            git push
+            gh issue comment "$ISSUE_NUMBER" --body "已${verb}到订阅：\`sources/$FILE\`（$(git rev-parse --short HEAD)）。层级由维护者另行调整。"
+          fi
+          gh issue close "$ISSUE_NUMBER" --reason completed
+      - name: 没能采纳
+        if: failure()
+        run: |
+          {
+            echo "没能采纳："
+            echo
+            echo '```'
+            cat error.txt build.txt 2>/dev/null | sed 's/^::[a-z]*:://'
+            echo '```'
+            echo
+            echo "改好 issue 后重新加上「采纳」标签即可。"
+          } > comment.md
+          gh issue comment "$ISSUE_NUMBER" --body-file comment.md
+          gh issue edit "$ISSUE_NUMBER" --remove-label 采纳
