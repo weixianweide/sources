@@ -414,7 +414,8 @@
               "addedSharesFactoryId": "quark-added-share",
               "shareSearchFactoryId": "quark-share-search"
             }
-          }
+          },
+          "tier": 0
         }
       },
       {
