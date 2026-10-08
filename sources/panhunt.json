@@ -1,0 +1,20 @@
+{
+  "factoryId": "cloud-drive-share-search",
+  "version": 1,
+  "arguments": {
+    "name": "PanHunt",
+    "drive": "quark",
+    "description": "PanHunt 盘搜里的夸克分享链接, 播放时转存到自己的夸克网盘",
+    "iconUrl": "https://pan.quark.cn/favicon.ico",
+    "config": {
+      "searchUrl": "https://s.panhunt.com/api/search?kw={keyword}&res=merge&cloud_types=quark",
+      "itemsPath": "data.merged_by_type.quark",
+      "titlePath": "note",
+      "linkPaths": [
+        "url"
+      ],
+      "maxKeywords": 2,
+      "maxShares": 8
+    }
+  }
+}

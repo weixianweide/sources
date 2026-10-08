@@ -1,0 +1,14 @@
+{
+  "factoryId": "cloud-drive-share-search",
+  "version": 1,
+  "arguments": {
+    "name": "花卷",
+    "drive": "quark",
+    "description": "花卷 (网页) 详情页里的夸克分享链接, 播放时转存到自己的夸克网盘",
+    "iconUrl": "https://pan.quark.cn/favicon.ico",
+    "config": {
+      "searchUrl": "https://www.hjzhencai.top/index.php/vod/search/wd/{keyword}.html",
+      "detailLinkSelector": ".module-card-item-title a"
+    }
+  }
+}

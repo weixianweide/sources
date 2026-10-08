@@ -1,0 +1,32 @@
+{
+  "factoryId": "cloud-drive-share-search",
+  "version": 1,
+  "arguments": {
+    "name": "夸克动画合集",
+    "drive": "quark",
+    "description": "整理好的夸克动画合集分享, 按番名找文件夹; 播放时转存到自己的夸克网盘",
+    "iconUrl": "https://pan.quark.cn/favicon.ico",
+    "config": {
+      "shares": [
+        "https://pan.quark.cn/s/68f098565da3",
+        "https://pan.quark.cn/s/6e7c653219fe",
+        "https://pan.quark.cn/s/e1bd0665b38f",
+        "https://pan.quark.cn/s/2d83252c207e",
+        "https://pan.quark.cn/s/aab10e922165",
+        "https://pan.quark.cn/s/bb8a1d6d18be",
+        "https://pan.quark.cn/s/15200d98f2d7",
+        "https://pan.quark.cn/s/aa10bff58886",
+        "https://pan.quark.cn/s/fc249fb537cf",
+        "https://pan.quark.cn/s/55c73ade5849",
+        "https://pan.quark.cn/s/e5767a59fe7c",
+        "https://pan.quark.cn/s/0dc1d6486f46",
+        "https://pan.quark.cn/s/efbd80b2fefc",
+        "https://pan.quark.cn/s/1271f8f2e113",
+        "https://pan.quark.cn/s/bd233d25e849",
+        "https://pan.quark.cn/s/51b5716438e3",
+        "https://pan.quark.cn/s/fa3ebb555792"
+      ],
+      "shareIndexDepth": 2
+    }
+  }
+}

@@ -1,0 +1,14 @@
+# 排在订阅最前面的源, 一行一个 sources/ 下的文件名, 越靠前越先列出; 没写在这里的按文件名排在后面
+quark-drive.json
+quark-anime-collection.json
+wanou.json
+feikuai.json
+huajuan.json
+pansou.json
+panhunt.json
+tucao.json
+xifan.json
+haixing.json
+hanime1-1080p.json
+hanime1-720p.json
+wedm.json

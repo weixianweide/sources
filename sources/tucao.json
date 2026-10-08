@@ -1,0 +1,42 @@
+{
+  "factoryId": "rule",
+  "version": 1,
+  "arguments": {
+    "name": "吐槽弹幕网",
+    "description": "tucao.my 的新番投稿, 繁中字幕为主; 视频是直链, 不用 WebView",
+    "iconUrl": "https://www.tucao.my/favicon.ico",
+    "rule": {
+      "baseUrl": "https://www.tucao.my",
+      "search": [
+        {
+          "op": "fetch",
+          "url": "/index.php?m=content&c=search&a=init&catid=24&dosubmit=1&info%5Btitle%5D={keyword}"
+        },
+        {
+          "op": "subjects",
+          "list": [
+            ".list .item"
+          ],
+          "link": "a.t",
+          "name": "a.t",
+          "linkPattern": "/play/h"
+        }
+      ],
+      "detail": [
+        {
+          "op": "fetch"
+        },
+        {
+          "op": "select",
+          "css": "#player_code li"
+        },
+        {
+          "op": "regexEpisodes",
+          "pattern": "type=video&file=(?<url>[^|]+)\\|(?<name>[^*]*)"
+        }
+      ],
+      "play": [],
+      "defaultSubtitleLanguage": "CHT"
+    }
+  }
+}

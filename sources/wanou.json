@@ -1,0 +1,20 @@
+{
+  "factoryId": "cloud-drive-share-search",
+  "version": 1,
+  "arguments": {
+    "name": "玩偶",
+    "drive": "quark",
+    "description": "玩偶 (苹果 CMS 接口) 里的夸克分享链接, 播放时转存到自己的夸克网盘",
+    "iconUrl": "https://pan.quark.cn/favicon.ico",
+    "config": {
+      "searchUrl": "https://woog.nxog.eu.org/api.php/provide/vod?ac=detail&wd={keyword}",
+      "itemsPath": "list",
+      "titlePath": "vod_name",
+      "linkPaths": [
+        "vod_down_url",
+        "vod_play_url",
+        "vod_content"
+      ]
+    }
+  }
+}
