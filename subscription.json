@@ -68,6 +68,7 @@
               "size": "size",
               "updatedAt": "updated_at",
               "videoHeight": "video_height",
+              "duration": "duration",
               "category": "obj_category",
               "videoCategories": [
                 "video"
