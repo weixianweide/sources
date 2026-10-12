@@ -68,7 +68,6 @@
               "size": "size",
               "updatedAt": "updated_at",
               "videoHeight": "video_height",
-              "duration": "duration",
               "category": "obj_category",
               "videoCategories": [
                 "video"
@@ -514,7 +513,7 @@
           "description": "PanSou 盘搜里的夸克分享链接, 播放时转存到自己的夸克网盘",
           "iconUrl": "https://pan.quark.cn/favicon.ico",
           "config": {
-            "searchUrl": "https://pansou-latest-hv4k.onrender.com/api/search?kw={keyword}&res=merge&cloud_types=quark",
+            "searchUrl": "https://pan.slarker.me/api/search?kw={keyword}&res=merge&cloud_types=quark",
             "itemsPath": "data.merged_by_type.quark",
             "titlePath": "note",
             "linkPaths": [
