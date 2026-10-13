@@ -1002,6 +1002,19 @@
         }
       },
       {
+        "factoryId": "rss",
+        "version": 1,
+        "arguments": {
+          "name": "ANi (直链)",
+          "description": "ANi 的 1080P 繁中直链, 只覆盖当季最近一周的更新",
+          "iconUrl": "",
+          "searchConfig": {
+            "searchUrl": "https://api.ani.rip/ani-download.xml",
+            "filterByEpisodeSort": true
+          }
+        }
+      },
+      {
         "factoryId": "web-selector",
         "version": 2,
         "arguments": {
