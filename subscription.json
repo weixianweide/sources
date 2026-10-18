@@ -335,6 +335,9 @@
                 "appName": "夸克 App",
                 "mobileOpen": {
                   "android": "qklink://www.uc.cn/b20b84fd735a8dd3f7541129bacc4e9a?action=open_url&url={url}",
+                  "androidAlternatives": [
+                    "qkcloudlink://www.uc.cn/d28241335bda4522a538cc12052f89dd?action=open_url&url={url}"
+                  ],
                   "ios": "qklink://www.uc.cn/656bdcddd4758b39206a8181c91a7d14?action=open_url&url={url}",
                   "inAppUserAgent": "quark/"
                 },
