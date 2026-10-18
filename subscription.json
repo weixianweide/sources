@@ -962,6 +962,14 @@
               "selectNames": "$[*]['title','name']",
               "preferShorterName": true
             },
+            "apiSearch": {
+              "searchUrl": "https://ani.girigirilove.com/index.php/ajax/suggest?mid=1&wd={keyword}",
+              "selectorSubjectFormatJsonPathIndexed": {
+                "selectLinks": "$.list[*]['id']",
+                "selectNames": "$.list[*]['name']",
+                "linkTemplate": "/GV{value}/"
+              }
+            },
             "channelFormatId": "index-grouped",
             "selectorChannelFormatFlattened": {
               "selectChannelNames": ".anthology-tab > .swiper-wrapper a",
