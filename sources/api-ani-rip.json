@@ -1,13 +1,22 @@
 {
   "factoryId": "rss",
-  "version": 1,
+  "version": 2,
   "arguments": {
     "name": "ANi (直链)",
-    "description": "ANi 的 1080P 繁中直链, 只覆盖当季最近一周的更新",
+    "description": "ANi 的 1080P 繁中直链: 按发布标题找到文件站上的视频, 约一年内开播的番整季都能播",
     "iconUrl": "",
     "searchConfig": {
-      "searchUrl": "https://api.ani.rip/ani-download.xml",
-      "filterByEpisodeSort": true
+      "searchUrl": "https://share.dmhy.org/topics/rss/rss.xml?keyword=ANi+{keyword}",
+      "filterByEpisodeSort": true,
+      "searchFallbackKeywords": true,
+      "titleToLink": {
+        "pattern": "^\\[ANi\\]\\s+(?:.+?\\s[/-]\\s\\s)?(?<file>(?<series>.+?) - [^\\[]+\\[.+\\])\\s*\\[MP4\\]$",
+        "url": "https://resources.ani.rip/{seasonYear}-{seasonMonth}/%5BANi%5D%20{file}?d=mp4",
+        "title": "[ANi] {file}",
+        "groupBy": "series",
+        "seasonRoundUpDays": 14,
+        "maxAgeDays": 400
+      }
     }
   }
 }
