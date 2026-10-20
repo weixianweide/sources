@@ -70,7 +70,8 @@
         "videoCategories": [
           "video"
         ],
-        "shareToken": "share_fid_token"
+        "shareToken": "share_fid_token",
+        "dolbyVision": "dolby_vision"
       },
       "rootFolderId": "0",
       "api": {
@@ -160,7 +161,15 @@
           "accessible": "accessable",
           "accessibleValues": [
             "true"
-          ]
+          ],
+          "meta": {
+            "width": "data.meta.width",
+            "height": "data.meta.height",
+            "duration": "data.meta.duration",
+            "codec": "data.meta.codec",
+            "hdr": "data.meta.hdr",
+            "dolbyVisionProfile": "data.meta.dolby_vision.profile"
+          }
         },
         "createFolder": {
           "request": {
