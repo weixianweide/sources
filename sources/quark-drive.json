@@ -104,6 +104,18 @@
           },
           "value": "data.nickname"
         },
+        "capacity": {
+          "request": {
+            "url": "https://{host}/1/clouddrive/member",
+            "query": {
+              "fetch_subscribe": "true",
+              "_ch": "home",
+              "fetch_identity": "true"
+            }
+          },
+          "total": "data.total_capacity",
+          "used": "data.use_capacity"
+        },
         "search": {
           "request": {
             "url": "https://{host}/1/clouddrive/file/search",
