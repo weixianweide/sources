@@ -972,42 +972,43 @@
             "search": [
               {
                 "op": "fetch",
-                "url": "/index.php/ajax/suggest?mid=1&wd={keyword}"
+                "url": "https://m3u8.girigirilove.com/api.php/Vod/get_list?vod_name={keyword}&limit=20&offset=0"
               },
               {
                 "op": "jsonSubjects",
-                "listPath": "list",
-                "idPath": "id",
-                "namePath": "name",
-                "urlTemplate": "/GV{id}/"
+                "listPath": "info.rows",
+                "idPath": "vod_id",
+                "namePath": "vod_name",
+                "urlTemplate": "https://ani.girigirilove.com/detail/{id}"
               }
             ],
             "detail": [
               {
-                "op": "fetch"
+                "op": "regex",
+                "pattern": "/detail/(\\d+)"
               },
               {
-                "op": "episodes",
-                "lists": [
-                  ".anthology-list-box"
-                ],
-                "tabs": [
-                  ".anthology-tab > .swiper-wrapper a"
-                ],
-                "tabPattern": "(?<ch>.+?)(\\d+?)",
-                "items": "a"
-              }
-            ],
-            "play": [
-              {
-                "op": "fetch"
+                "op": "fetch",
+                "url": "https://m3u8.girigirilove.com/api.php/Vod/get_detail?vod_id={value}"
               },
               {
-                "op": "maccmsPlayer"
+                "op": "replace",
+                "pattern": "(\"vod_play_from\":\"(?:[^\"]*?\\$\\$\\$)?)chs(?=\"|\\$\\$\\$)",
+                "replacement": "$1简中"
+              },
+              {
+                "op": "replace",
+                "pattern": "(\"vod_play_from\":\"(?:[^\"]*?\\$\\$\\$)?)cht(?=\"|\\$\\$\\$)",
+                "replacement": "$1繁中"
+              },
+              {
+                "op": "maccmsEpisodes",
+                "listPath": "info",
+                "directOnly": true
               }
             ],
+            "play": [],
             "matchEpisodeSortFromName": "第\\s*(?<ep>.+)\\s*[话集]",
-            "requestIntervalMillis": 3000,
             "defaultResolution": "1080P",
             "defaultSubtitleLanguage": "CHS",
             "matchVideo": {
