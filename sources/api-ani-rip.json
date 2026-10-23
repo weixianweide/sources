@@ -9,6 +9,11 @@
       "searchUrl": "https://share.dmhy.org/topics/rss/rss.xml?keyword=ANi+{keyword}",
       "filterByEpisodeSort": true,
       "searchFallbackKeywords": true,
+      "searchKeywordTransforms": [
+        {"op": "regexReplace", "value": "(?<![A-Za-z0-9])-|-(?![A-Za-z0-9])", "replacement": " "},
+        {"op": "regexReplace", "value": "\\s+", "replacement": " "},
+        {"op": "trim"}
+      ],
       "titleToLink": {
         "pattern": "^\\[ANi\\]\\s+(?:.+?\\s[/-]\\s\\s)?(?<file>(?<series>.+?) - [^\\[]+\\[.+\\])\\s*\\[MP4\\]$",
         "url": "https://resources.ani.rip/{seasonYear}-{seasonMonth}/%5BANi%5D%20{file}?d=mp4",
