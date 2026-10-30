@@ -19,7 +19,7 @@ OUTPUT = os.path.join(ROOT, 'subscription.json')
 
 FILE_NAME = re.compile(r'^[a-z0-9][a-z0-9-]*\.json$')
 # 应用认得的数据源类型
-KNOWN_TYPES = {'web-selector', 'rule', 'maccms', 'direct-api', 'rss', 'cloud-drive', 'cloud-drive-share-search'}
+KNOWN_TYPES = {'web-selector', 'rule', 'maccms', 'direct-api', 'json-api', 'rss', 'cloud-drive', 'cloud-drive-share-search'}
 # 网盘的接入方式只由维护者改
 MAINTAINER_TYPES = {'cloud-drive', 'cloud-drive-share-search'}
 
