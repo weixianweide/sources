@@ -1,67 +1,85 @@
 {
-  "factoryId": "web-selector",
-  "version": 2,
+  "factoryId": "json-api",
+  "version": 1,
   "arguments": {
     "name": "稀饭动漫",
     "description": "",
-    "iconUrl": "https://dm1.xfdm.pro/upload/site/20240308-1/813e41f81d6f85bfd7a44bf8a813f9e5.png",
+    "iconUrl": "https://next.xifanacg.com/favicon.ico",
     "searchConfig": {
-      "searchUrl": "https://dm1.xfdm.pro/search.html?wd={keyword}",
-      "searchUseOnlyFirstWord": true,
-      "rawBaseUrl": "",
-      "subjectFormatId": "indexed",
-      "selectorSubjectFormatA": {
-        "selectLists": "div.video-info-header > a",
-        "preferShorterName": true
+      "baseUrl": "https://api.xifanacg.com",
+      "headers": "apikey: sb_publishable_OBIVAWACIX6lPXrO98_z24_HcsmalkA\nAuthorization: Bearer sb_publishable_OBIVAWACIX6lPXrO98_z24_HcsmalkA\nOrigin: https://next.xifanacg.com",
+      "userAgent": "",
+      "requestInterval": 1000,
+      "searchCacheTtl": 7200000,
+      "search": {
+        "request": {
+          "url": "https://api.xifanacg.com/rest/v1/rpc/search_animes",
+          "method": "POST",
+          "headers": "",
+          "body": "{\"search_term\":\"{keyword}\",\"page_number\":{page},\"items_per_page\":{pageSize},\"sort_by\":\"bangumi_score\",\"sort_order\":\"desc\",\"filter_only_published\":true}"
+        },
+        "pageSize": 50,
+        "selectItems": "$[*]",
+        "selectName": "$.title",
+        "selectId": "$.id",
+        "selectAliases": "",
+        "subjectUrlTemplate": "https://next.xifanacg.com/anime/{id}"
       },
-      "selectorSubjectFormatIndexed": {
-        "selectNames": "body > .box-width .search-box .thumb-content > .thumb-txt",
-        "selectLinks": "body > .box-width .search-box .thumb-menu > a",
-        "preferShorterName": true
-      },
-      "selectorSubjectFormatJsonPathIndexed": {
-        "selectLinks": "$[*]['url', 'link']",
-        "selectNames": "$[*]['title','name']",
-        "preferShorterName": true
-      },
-      "channelFormatId": "index-grouped",
-      "selectorChannelFormatFlattened": {
-        "selectChannelNames": ".anthology-tab > .swiper-wrapper a",
-        "matchChannelName": "^()?(?<ch>.+?)(\\d+)?$",
-        "selectEpisodeLists": ".anthology-list-box",
-        "selectEpisodesFromList": "a",
-        "selectEpisodeLinksFromList": "",
-        "matchEpisodeSortFromName": "第\\s*(?<ep>.+)\\s*[话集]"
-      },
-      "selectorChannelFormatNoChannel": {
-        "selectEpisodes": "#glist-1 > div.module-blocklist.scroll-box.scroll-box-y > div > a",
-        "selectEpisodeLinks": "",
-        "matchEpisodeSortFromName": "第\\s*(?<ep>.+)\\s*[话集]"
-      },
-      "filterByEpisodeSort": true,
-      "filterBySubjectName": true,
-      "selectMedia": {
-        "distinguishSubjectName": true,
-        "distinguishChannelName": true
-      },
-      "matchVideo": {
-        "enableNestedUrl": true,
-        "matchNestedUrl": "^.+(m3u8|vip|xigua\\.php).+\\?",
-        "matchVideoUrl": "(?<v>http(s)?:\\/\\/(?!.*http(s)?:\\/\\/).+((\\.mp4)|(\\.mkv)|(m3u8)).*(\\?.+)?)|(akamaized)|(bilivideo.com)",
-        "cookies": "quality=1080",
-        "addHeadersToVideo": {
-          "referer": "",
-          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+      "subject": {
+        "request": {
+          "url": "https://api.xifanacg.com/rest/v1/rpc/get_anime_detail",
+          "method": "POST",
+          "headers": "",
+          "body": "{\"p_id\":{id}}"
+        },
+        "episodes": {
+          "selectEpisodes": "$.episodes[*]",
+          "selectName": "$.title",
+          "selectId": "$.id",
+          "selectSort": "$.episode_number",
+          "selectType": "$.kind",
+          "typeMapping": "main=MainStory\nsp=SP\nova=OVA\noad=OAD\nmovie=MainStory\nex=SP",
+          "matchEpisodeSortFromName": "第\\s*(?<ep>.+)\\s*[话集]",
+          "nameTemplate": "{sort} {name}",
+          "episodeUrlTemplate": "https://next.xifanacg.com/anime/{subjectId}/play/{id}",
+          "selectVideoUrl": ""
+        },
+        "channelFormatId": "grouped",
+        "channelFormatGrouped": {
+          "selectChannels": "$.sources[*]",
+          "selectChannelName": "$.name"
+        },
+        "channelFormatDeclared": {
+          "channels": []
         }
       },
-      "defaultResolution": "1080P"
+      "play": {
+        "request": {
+          "url": "https://api.xifanacg.com/functions/v1/issue-web-playback",
+          "method": "POST",
+          "headers": "",
+          "body": "{\"action\":\"fallback\",\"episode_id\":{id}}"
+        },
+        "selectCandidates": "$.candidates[*]",
+        "selectCandidateChannel": "$.source_name",
+        "selectVideoUrl": "$.url",
+        "fallbackToFirstCandidate": false,
+        "referer": "",
+        "videoHeaders": ""
+      },
+      "defaultResolution": "1080P",
+      "defaultSubtitleLanguage": "CHS",
+      "onlySupportsPlayers": [],
+      "autoMatch": {
+        "enabled": true,
+        "searchUseOnlyFirstWord": true,
+        "searchRemoveSpecial": true,
+        "searchUseSubjectNamesCount": 3,
+        "preferShorterName": true,
+        "filterByEpisodeSort": true
+      }
     },
-    "channelTiers": {
-      "新番主线②": 0,
-      "新番主线①": 0,
-      "旧番主线①": 1,
-      "备用①": 6
-    },
-    "tier": 0
+    "tier": 0,
+    "channelTiers": {}
   }
 }
