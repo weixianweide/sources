@@ -23,7 +23,9 @@
           "listPath": "info.rows",
           "idPath": "vod_id",
           "namePath": "vod_name",
-          "urlTemplate": "https://ani.girigirilove.com/detail/{id}"
+          "urlTemplate": "https://ani.girigirilove.com/detail/{id}",
+          "aliasUrl": "https://m3u8.girigirilove.com/api.php/Vod/get_detail?vod_id={id}",
+          "aliasListPath": "info"
         }
       ],
       "detail": [
