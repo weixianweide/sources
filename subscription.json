@@ -45,7 +45,8 @@
             "envelope": {
               "code": "code",
               "okCodes": [
-                "0"
+                "0",
+                "2000000"
               ],
               "status": "status",
               "authStatuses": [
@@ -261,6 +262,41 @@
                 },
                 "items": "data.list",
                 "total": "metadata._total",
+                "pageSize": 100
+              },
+              "searchShare": {
+                "request": {
+                  "method": "POST",
+                  "url": "https://api-album.quark.cn/api/share/file/search",
+                  "query": {
+                    "biz_scene": "share-search"
+                  },
+                  "body": {
+                    "data": {
+                      "pwd_id": "{shareId}",
+                      "stoken": "{shareToken}",
+                      "search_type": "",
+                      "page": "{page}",
+                      "size": "{pageSize}",
+                      "filters": [
+                        {
+                          "value": [
+                            "{keyword}"
+                          ],
+                          "key": "q",
+                          "channel": "submit",
+                          "channel_type": "input",
+                          "context": ""
+                        }
+                      ],
+                      "sort_by": "rel",
+                      "search_version": "1"
+                    }
+                  },
+                  "cookie": false
+                },
+                "items": "data.file_list",
+                "total": "metadata.page.total",
                 "pageSize": 100
               },
               "saveFromShare": {
